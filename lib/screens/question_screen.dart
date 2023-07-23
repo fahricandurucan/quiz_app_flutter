@@ -44,7 +44,8 @@ class QuestionScreen extends GetView<HomeController> {
                             ),
                             Text(
                               controller.seconds.value.toString(),
-                              style: const TextStyle(fontSize: 20, color: Colors.white),
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                             ),
                           ],
                         )),

@@ -21,17 +21,20 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           actions: [
-            IconButton(
-                onPressed: () {
-                  Get.to(
-                    const FavoriteScreen(),
-                  );
-                },
-                icon: const Icon(
-                  Icons.favorite,
-                  color: Colors.white,
-                  size: 30,
-                ))
+            Padding(
+              padding: const EdgeInsets.only(right: 12.0),
+              child: IconButton(
+                  onPressed: () {
+                    Get.to(
+                      const FavoriteScreen(),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: Colors.white,
+                    size: 30,
+                  )),
+            ),
           ],
         ),
         body: Obx(

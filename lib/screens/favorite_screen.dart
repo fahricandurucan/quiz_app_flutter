@@ -92,7 +92,7 @@ class FavoriteScreen extends GetView<HomeController> {
                               },
                               child: const Icon(
                                 Icons.delete,
-                                color: Colors.grey,
+                                color: Colors.white,
                                 size: 30,
                               ),
                             ),
