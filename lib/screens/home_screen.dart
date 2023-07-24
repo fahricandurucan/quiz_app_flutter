@@ -89,20 +89,20 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(right: 20, top: 25),
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    print("id = ${category.id}");
-                                    controller.likeListCategoryName.contains(category.name)
-                                        ? controller.deleteBox(category)
-                                        : controller.addBox(category);
-                                    controller.lenghtBox();
-                                  },
+                              child: GestureDetector(
+                                onTap: () {
+                                  print("id = ${category.id}");
+                                  controller.likeListCategoryName.contains(category.name)
+                                      ? controller.deleteBox(category)
+                                      : controller.addBox(category);
+                                  controller.lenghtBox();
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.all(Radius.circular(20))),
                                   child: controller.likeListCategoryName.contains(category.name)
                                       ? const Icon(
                                           Icons.favorite,

@@ -59,11 +59,17 @@ class ScoreScreen extends GetView<HomeController> {
                             "Congrats!",
                             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                           ),
-                    Text(
-                      "${(controller.correctList.length) * 20}% Score",
-                      style: const TextStyle(
-                          fontSize: 28, fontWeight: FontWeight.bold, color: Colors.orange),
-                    ),
+                    controller.isHighScore(controller.scoreList.last)
+                        ? Text(
+                            "${(controller.correctList.length) * 20}% High Score",
+                            style: const TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.bold, color: Colors.orange),
+                          )
+                        : Text(
+                            "${(controller.correctList.length) * 20}% Score",
+                            style: const TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.bold, color: Colors.orange),
+                          ),
                     const SizedBox(
                       height: 20,
                     ),

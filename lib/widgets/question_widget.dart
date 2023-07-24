@@ -85,6 +85,7 @@ class QuestionWidget extends GetView<HomeController> {
                   ElevatedButton(
                     onPressed: () {
                       controller.seconds.value = 0;
+                      controller.addScore(controller.correctList.length);
                       Get.off(const ScoreScreen());
                     },
                     child: const Text(
@@ -102,7 +103,7 @@ class QuestionWidget extends GetView<HomeController> {
   }
 }
 
-class TimeUpModal extends StatelessWidget {
+class TimeUpModal extends GetView<HomeController> {
   const TimeUpModal({super.key});
 
   @override
@@ -141,6 +142,7 @@ class TimeUpModal extends StatelessWidget {
             Center(
               child: ElevatedButton(
                   onPressed: () {
+                    controller.addScore(controller.correctList.length);
                     Get.off(const ScoreScreen());
                   },
                   child: const Text("Score", style: TextStyle(color: Colors.orange))),

@@ -42,6 +42,25 @@ class HomeController extends GetxController {
   final isJokerSelected2 = false.obs;
   final jokerIncorrectList = <String>[].obs;
 
+  final scoreList = <int>[].obs;
+
+  void addScore(int score) {
+    scoreList.add(score);
+  }
+
+  bool isHighScore(int score) {
+    int max = score;
+    if (max == 0) {
+      return false;
+    }
+    for (final x in scoreList) {
+      if (x > max) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   void lenghtBox() {
     print(categoryBox.length.toString());
   }
