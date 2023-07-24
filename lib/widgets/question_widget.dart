@@ -62,21 +62,27 @@ class QuestionWidget extends GetView<HomeController> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      if (!controller.isAnswerAdded.value) {
-                        var list = [];
-                        for (int i = 0; i < 4; i++) {
-                          if (!question.shuffleList![i].isCorrect) {
-                            list.add(question.shuffleList![i].text);
-                          }
-                        }
-                        list.shuffle();
-                        for (int i = 0; i < 2; i++) {
-                          controller.jokerIncorrectList.add(list[i]);
-                        }
-                        print(controller.jokerIncorrectList.toString());
-                      }
-                    },
+                    onTap: controller.isAnswerAdded.value == true || question.solved == true
+                        ? null
+                        : () {
+                            if (!controller.isAnswerAdded.value) {
+                              var list = [];
+                              for (int i = 0; i < 4; i++) {
+                                if (!question.shuffleList![i].isCorrect) {
+                                  list.add(question.shuffleList![i].text);
+                                }
+                              }
+                              list.shuffle();
+                              for (int i = 0; i < 2; i++) {
+                                if (controller.jokerIncorrectList.contains(list[i])) {
+                                  i = i;
+                                } else {
+                                  controller.jokerIncorrectList.add(list[i]);
+                                }
+                              }
+                              print(controller.jokerIncorrectList.toString());
+                            }
+                          },
                     child: Image.asset(
                       "images/joker.png",
                       width: 60,

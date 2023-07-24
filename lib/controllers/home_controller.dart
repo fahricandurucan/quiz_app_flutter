@@ -46,10 +46,8 @@ class HomeController extends GetxController {
   final scoreList = <int>[].obs;
 
   void addScore(int score) {
-    if (!scoreBox.values.toList().contains(score)) {
-      scoreBox.add(score);
-      scoreList.add(score);
-    }
+    scoreBox.add(score);
+    scoreList.add(score);
   }
 
   void deleteScores() {
@@ -90,23 +88,6 @@ class HomeController extends GetxController {
     likeList.remove(category);
   }
 
-  // void addFav(Category category) {
-  //   if (likeList.contains(category)) {
-  //     copy.value = true;
-  //   } else {
-  //     likeList.add(category);
-  //     copy.value = false;
-  //   }
-  // }
-
-  // void removeFav(Category category) {
-  //   if (likeList.isNotEmpty) {
-  //     likeList.remove(category);
-  //   } else {
-  //     copy.value = false;
-  //   }
-  // }
-
   void startTimer() {
     seconds.value = 60;
 
@@ -139,7 +120,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> getQuestions(int categoryId, int count) async {
-    // EasyLoading.show(maskType: EasyLoadingMaskType.clear, status: "Preapering questions");
     timer.cancel();
     final result = await Api.getQuestions(categoryId, count);
     if (result != null) {
@@ -154,7 +134,6 @@ class HomeController extends GetxController {
       startTimer();
     }
     print(questionList.length);
-    // EasyLoading.dismiss();
   }
 
   @override
@@ -166,9 +145,9 @@ class HomeController extends GetxController {
 
     try {
       print("onInıt starting...");
-      likeList.addAll(categoryBox.values);
       for (var x in categoryBox.values) {
-        likeListCategoryName.add(x.name);
+        !likeListCategoryName.contains(x.name) ? likeListCategoryName.add(x.name) : null;
+        !likeList.contains(x) ? likeList.add(x) : null;
       }
       for (final x in likeList) {
         print("fahrican");

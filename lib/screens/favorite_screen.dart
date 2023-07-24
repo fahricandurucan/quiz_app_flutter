@@ -37,7 +37,7 @@ class FavoriteScreen extends GetView<HomeController> {
               const BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40)),
         ),
         child: Obx(
-          () => controller.likeList.isEmpty
+          () => controller.likeListCategoryName.isEmpty
               ? const Center(
                   child: Text(
                     "You have not selected a favorite category yet",
@@ -45,7 +45,7 @@ class FavoriteScreen extends GetView<HomeController> {
                   ),
                 )
               : ListView.builder(
-                  itemCount: controller.likeList.length,
+                  itemCount: controller.likeListCategoryName.length,
                   itemBuilder: (context, index) {
                     var category = controller.likeList[index];
                     return Padding(
