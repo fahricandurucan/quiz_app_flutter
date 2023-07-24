@@ -8,6 +8,7 @@ import 'package:quiz_app_flutter/screens/splash_screen.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(CategoryAdapter());
+  await Hive.openBox('score');
   await Hive.openBox<Category>('category');
 
   EasyLoading.instance

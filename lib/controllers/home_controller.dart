@@ -38,6 +38,7 @@ class HomeController extends GetxController {
   final copy = false.obs;
 
   final Box<Category> categoryBox = Hive.box<Category>("category");
+  final Box scoreBox = Hive.box("score");
 
   final isJokerSelected2 = false.obs;
   final jokerIncorrectList = <String>[].obs;
@@ -45,12 +46,24 @@ class HomeController extends GetxController {
   final scoreList = <int>[].obs;
 
   void addScore(int score) {
-    scoreList.add(score);
+    if (!scoreBox.values.toList().contains(score)) {
+      scoreBox.add(score);
+      scoreList.add(score);
+    }
+  }
+
+  void deleteScores() {
+    for (final key in scoreBox.keys) {
+      scoreBox.delete(key);
+    }
   }
 
   bool isHighScore(int score) {
     int max = score;
     if (max == 0) {
+      return false;
+    }
+    if (scoreList.isEmpty) {
       return false;
     }
     for (final x in scoreList) {
@@ -163,6 +176,19 @@ class HomeController extends GetxController {
       }
     } catch (e) {
       print(e.toString());
+    }
+
+    // deleteScores();
+
+    try {
+      for (var x in scoreBox.values) {
+        scoreList.add(x);
+        for (final a in scoreList) {
+          print("score = $a");
+        }
+      }
+    } catch (e) {
+      print(e);
     }
 
     super.onInit();

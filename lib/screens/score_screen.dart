@@ -17,9 +17,18 @@ class ScoreScreen extends GetView<HomeController> {
             const SizedBox(
               height: 30,
             ),
-            const Text(
-              "THE END",
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.orange),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "GAME",
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.orange),
+                ),
+                Text(
+                  "OVER",
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ],
             ),
             Text(
               "Total:${controller.questionList.length} Question",
@@ -59,7 +68,7 @@ class ScoreScreen extends GetView<HomeController> {
                             "Congrats!",
                             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                           ),
-                    controller.isHighScore(controller.scoreList.last)
+                    controller.isHighScore(controller.correctList.length)
                         ? Text(
                             "${(controller.correctList.length) * 20}% High Score",
                             style: const TextStyle(
