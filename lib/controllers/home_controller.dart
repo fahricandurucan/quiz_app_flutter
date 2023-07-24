@@ -39,6 +39,9 @@ class HomeController extends GetxController {
 
   final Box<Category> categoryBox = Hive.box<Category>("category");
 
+  final isJokerSelected2 = false.obs;
+  final jokerIncorrectList = <String>[].obs;
+
   void lenghtBox() {
     print(categoryBox.length.toString());
   }

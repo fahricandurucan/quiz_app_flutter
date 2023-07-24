@@ -24,7 +24,9 @@ class AnswerWidget extends GetView<HomeController> {
       () => Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 4, bottom: 4),
         child: GestureDetector(
-          onTap: controller.isAnswerAdded.value == true || question.solved == true
+          onTap: controller.isAnswerAdded.value == true ||
+                  question.solved == true ||
+                  controller.jokerIncorrectList.contains(answer.text)
               ? null
               : () {
                   answer.isSelected = true;
@@ -43,13 +45,15 @@ class AnswerWidget extends GetView<HomeController> {
           child: Container(
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
-              color: controller.correctList.contains(answer.text)
-                  ? Colors.green
-                  : controller.inCorrectList.contains(answer.text)
-                      ? Colors.red
-                      : Colors.white,
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
-            ),
+                color: controller.correctList.contains(answer.text)
+                    ? Colors.green
+                    : controller.inCorrectList.contains(answer.text)
+                        ? Colors.red
+                        : Colors.white,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                border: controller.jokerIncorrectList.contains(answer.text)
+                    ? Border.all(color: Colors.red, width: 2)
+                    : null),
             width: double.infinity,
             height: 60,
             child: Row(children: [

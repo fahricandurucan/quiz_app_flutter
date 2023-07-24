@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_app_flutter/controllers/home_controller.dart';
 import 'package:quiz_app_flutter/models/category.dart';
-import 'package:quiz_app_flutter/screens/score_screen.dart';
 import 'package:quiz_app_flutter/widgets/question_widget.dart';
 import 'package:quiz_app_flutter/widgets/timer_widget.dart';
 
@@ -113,45 +112,13 @@ class QuestionScreen extends GetView<HomeController> {
                         physics: const NeverScrollableScrollPhysics(),
                         controller: controller.pageController,
                         onPageChanged: (value) {
+                          controller.isJokerSelected2.value = false;
                           controller.pageIdx.value = value + 1;
                           controller.selectedAnswer.value = -1;
                         },
                         children: controller.questionList
                             .map((question) => QuestionWidget(question: question))
                             .toList()),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 45),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            controller.seconds.value = 0;
-                            Get.back();
-                            Get.back();
-                          },
-                          child: const Text(
-                            "HOME",
-                            style: TextStyle(color: Colors.indigo),
-                          ),
-                        ),
-                        IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-                        ElevatedButton(
-                          onPressed: () {
-                            controller.seconds.value = 0;
-                            Get.off(const ScoreScreen());
-                          },
-                          child: const Text(
-                            "FINISH",
-                            style: TextStyle(color: Colors.indigo),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                 ],
               )));

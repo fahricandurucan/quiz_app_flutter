@@ -41,6 +41,7 @@ flutter:
    - images/congrats.png
    - images/time.png
    - images/lose.png
+   - images/joker.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

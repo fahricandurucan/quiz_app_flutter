@@ -42,6 +42,59 @@ class QuestionWidget extends GetView<HomeController> {
                     ),
                   ),
                 ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 45),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.seconds.value = 0;
+                      Get.back();
+                      Get.back();
+                    },
+                    child: const Text(
+                      "HOME",
+                      style: TextStyle(color: Colors.indigo),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      if (!controller.isAnswerAdded.value) {
+                        var list = [];
+                        for (int i = 0; i < 4; i++) {
+                          if (!question.shuffleList![i].isCorrect) {
+                            list.add(question.shuffleList![i].text);
+                          }
+                        }
+                        list.shuffle();
+                        for (int i = 0; i < 2; i++) {
+                          controller.jokerIncorrectList.add(list[i]);
+                        }
+                        print(controller.jokerIncorrectList.toString());
+                      }
+                    },
+                    child: Image.asset(
+                      "images/joker.png",
+                      width: 60,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.seconds.value = 0;
+                      Get.off(const ScoreScreen());
+                    },
+                    child: const Text(
+                      "FINISH",
+                      style: TextStyle(color: Colors.indigo),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ],
