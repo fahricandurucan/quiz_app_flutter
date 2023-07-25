@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:quiz_app_flutter/controllers/home_controller.dart';
@@ -74,6 +75,9 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Card(
                               elevation: 10,
+                              shadowColor: controller.likeListCategoryName.contains(category.name)
+                                  ? Colors.orange
+                                  : null,
                               margin:
                                   const EdgeInsets.only(top: 20, bottom: 12, left: 12, right: 12),
                               color: Colors.indigo,
@@ -86,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                               )),
-                            ),
+                            ).animate().shake(hz: 2, curve: Curves.easeIn),
                             Padding(
                               padding: const EdgeInsets.only(right: 20, top: 25),
                               child: GestureDetector(
@@ -97,22 +101,31 @@ class HomeScreen extends StatelessWidget {
                                       : controller.addBox(category);
                                   controller.lenghtBox();
                                 },
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                                  child: controller.likeListCategoryName.contains(category.name)
-                                      ? const Icon(
-                                          Icons.favorite,
-                                          color: Colors.orange,
-                                        )
-                                      : const Icon(
-                                          Icons.favorite_border,
-                                          color: Colors.grey,
-                                        ),
+                                child: AnimatedCrossFade(
+                                  firstChild: firstWidget(),
+                                  secondChild: secondWidget(),
+                                  crossFadeState:
+                                      controller.likeListCategoryName.contains(category.name)
+                                          ? CrossFadeState.showFirst
+                                          : CrossFadeState.showSecond,
+                                  duration: const Duration(milliseconds: 600),
                                 ),
+                                // child: Container(
+                                //   height: 40,
+                                //   width: 40,
+                                //   decoration: const BoxDecoration(
+                                //       color: Colors.white,
+                                //       borderRadius: BorderRadius.all(Radius.circular(20))),
+                                //   child: controller.likeListCategoryName.contains(category.name)
+                                //       ? const Icon(
+                                //           Icons.favorite,
+                                //           color: Colors.orange,
+                                //         )
+                                //       : const Icon(
+                                //           Icons.favorite_border,
+                                //           color: Colors.grey,
+                                //         ),
+                                // ),
                               ),
                             ),
                           ],
@@ -122,5 +135,35 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
         ));
+  }
+
+  Widget firstWidget() {
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        color: Colors.grey[400],
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+      ),
+      child: const Icon(
+        Icons.favorite,
+        color: Colors.orange,
+      ),
+    );
+  }
+
+  Widget secondWidget() {
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
+      child: const Icon(
+        Icons.favorite_border,
+        color: Colors.grey,
+      ),
+    );
   }
 }
